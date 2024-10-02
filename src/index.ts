@@ -173,11 +173,14 @@ let listadeTareas : Tarea[] = [
 /*Comenzamos con el bucle for each, que verdaderamente actua como una funcion 
 ya que recibe parametros */
 
+/*Se le podria incluir tambien la lista de las tareas como parametro de entrada antes de la =>*/ 
 listadeTareas.forEach(
     (tarea:Tarea, index:number) => {
         console.log(`${index} - ${tarea.nombre}`);
-    }
-)
+    });
+
+
+
 
 /*Bucle For: */
 for (let index = 0; index < listadeTareas.length; index ++){
@@ -196,6 +199,7 @@ while (tarea1.estado == EstadoTarea.Enproceso){
         tarea1.prioridad++;
     }
 }
+ 
 
 /*Bucle Do-While --> Se ejecutará al menos una vez*/
 do {
@@ -290,12 +294,12 @@ despedidaOpcional(); //Adios anonimo
 despedidaOpcional("Paco"); //Adios Paco
 
 /**
- * Funcion de varios parametros
+ * Funcion de varios Parametros
  * @param nombre 
  * @param apellidos 
  * @param edad 
  */
-function variosParam (nombre:string,apellidos?:string, edad:number = 18){
+function variosParam (nombre:string = "Juan",apellidos?:string, edad:number = 18){
     if (apellidos){
         console.log(`${nombre} ${apellidos} tiene ${edad} años`);
     }else{
@@ -303,10 +307,13 @@ function variosParam (nombre:string,apellidos?:string, edad:number = 18){
     }
 }
 
+
+/*Si pongo arriba por ejemplo nombre:string = "Juan", poniendo undefined en su sitio llamariamos a ese valor*/
 variosParam ("Pepe"); //Pepe tiene 18 años
 variosParam("Jose","Martinez"); //Jose Martinez tiene 18 años
 variosParam("Pepe","Gomez",23); //Pepe Gomez tiene 23 años
 variosParam("Pepe",undefined,23); //Pepe tiene 23 años
+variosParam(undefined,undefined,23);
 
 
 function ejemplosVariosTipos (a : string | number){
@@ -326,7 +333,31 @@ ejemplosVariosTipos(3);
 /*ejemplosVariosTipos(true); --> no se puede, da error*/
 
 /*Funciones anonimas*/
-//let ejemploArrow = () => {};
+
+let fAnonima = function (){
+    console.log("Hola mundo");
+}
+
+fAnonima();
+
+let fitera = function (tarea:Tarea, indice:number){
+    console.log (`La tarea es ${tarea.nombre} y esta en la posicion ${indice}`)
+}
+
+listadeTareas.forEach(fitera);
+
+
+/*Funciones arrow*/
+let fArrow = (tarea:Tarea, indice:number) => {
+    console.log(`${indice} - ${tarea.nombre}`);
+}
+
+listadeTareas.forEach (fArrow);
+//listadoTareas.forEach ((tarea:Tarea) => {console.log(`${tarea.nombre}`)}); --> No creamos la funcion arrow, se lo pasamos directamente. Tambien podriamos pasar una funcion anonima
+
+
+
+
 
 
 //Funcion con return
