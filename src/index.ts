@@ -1,3 +1,5 @@
+import { promises } from "dns";
+
 console.log("Hola mundo");
 
 /**
@@ -439,7 +441,7 @@ function* ejemploGenerada (){
     }
 }
 
-/*La funcion generadora será almacenada dentro de una variable*/
+/*La funcion generadora será almacenada dentro de una variable --> La podremos pausar y reanudar*/
 let generadora = ejemploGenerada();
 console.log(generadora.next().value);//0
 console.log(generadora.next().value);//1
@@ -465,3 +467,104 @@ console.log(generatorSaga.next().value); // 1 (lo ha hecho el Worker)
 console.log(generatorSaga.next().value); // 2 (lo ha hecho el Worker)
 console.log(generatorSaga.next().value); // 3 (lo ha hecho el Worker)
 console.log(generatorSaga.next().value); // 4 (lo ha hecho el Watcher)
+
+/*Apuntes 07-10-2024*/
+
+
+/**
+ * CALLBACK
+ */
+
+let fsuma = function suma (a:number, b:number){
+    return a+b;
+}
+
+let fresta = function resta (a:number, b:number){
+    return a-b;
+}
+
+let fmultiplica = function multiplica (a:number, b:number){
+    return a*b;
+}
+
+function opera (x:number, y:number, funcion:(a:number, b:number) => number){
+    return funcion (x,y);
+}
+
+opera (1,2,fsuma); /*Sumarás 1 y 2*/
+opera (4,2,fresta); /*Restarás 4 y 2*/
+opera (4,2,fmultiplica);
+
+
+
+
+
+/**
+ * Funciones Asincronas
+ */
+
+
+
+
+async function asicrona() {
+    
+    let suma:number = 0;
+    for (let i = 0; i < 1000000; i++){
+        suma += i;
+    }
+    return suma;
+
+}
+
+asicrona().then((data:number) => {console.log(`El resultado de ejecutar asyc = ${data}`)});
+console.log("Línea de Código posterior a llamada asíncrona");
+
+
+/*Definimos un nuevo tipo de objetos para casteal el JSON*/
+type University =  {
+    domains:string[],
+    alpha_two_code:string,
+    name:string
+}
+
+
+
+/*Todas las funciones asincronas devolvera una promesa*/
+async function getDataUniversity() : Promise <University[]> {
+    
+    const data = await fetch("hhtp://universities.hipolabs.com/search?country=Spain");
+    let respuesta:Promise<University[]> = await data.json() as Promise<University[]>;
+    return respuesta;
+
+}
+
+getDataUniversity().then((data:University[]) => {
+    data.forEach ((universidad) => {
+        console.log (universidad.name);
+    })
+})
+
+/*getDataUniversity().then ((data:University[]) => {
+    for (let i = 0; i < data.lenght; i++){
+    console.log (data[i].name)
+})}*/
+
+/**
+ * Funciones Generadoras
+ */
+
+function* fGeneradora (): Generator <Tarea>{
+    for (let tarea  in listadeTareas){
+        yield listadeTareas[tarea]
+    }
+}
+
+let funcionGen = fGeneradora();
+/*Se iran devolviendo posicion a posicion*/
+console.log(funcionGen.next());
+console.log(funcionGen.next());
+
+
+
+
+
