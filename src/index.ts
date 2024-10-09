@@ -747,11 +747,12 @@ Cookies.remove('nombre');
 Cookies.remove('apellidos');
 Cookies.remove ('email');
 
-console.log('Cookies después de borrar:');
-console.log('Nombre:', nombreCookies); 
-console.log('Apellidos:', apellidosCookies); 
-console.log('Email:', emailCookies); 
 
-/*Al borrar las cookies, nos tendra que salir como resultado undefined*/
+//Ahora el resultado se nos mostrara undefined
+console.log('Cookies después de borrar:');
+console.log('Nombre:', Cookies.get('nombre')); 
+console.log('Apellidos:', Cookies.get('apellidos')); 
+console.log('Email:', Cookies.get('email')); 
+
 
 
