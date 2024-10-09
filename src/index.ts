@@ -616,7 +616,8 @@ datosWebPage.next().then(
     ({value,done}) => {
         console.log(`${value.Name} - ${value.Description}`);
     }
-);
+); 
+
 
 /*SobreCargas de Funciones*/
 
@@ -640,6 +641,12 @@ function hola (nombre:string, apellido?:string, edad?:string){
 
 
 /*Ejercicio 2 Practica 1.1*/
+/**
+ * Almacena la informacion en un sessionStorage o en un localStorage en funcion del tipo indicado
+ * @param type - tipo que se le indica a la hora de almacenar la informacion
+ * @param key  - clave con la que queremos que se guarde la informacion
+ * @param data - lista de Tareas desde donde extraeremos dicha informacion
+ */
 function ejercicio2 (type:string = "SessionStorage", key:string, data:Tarea[] ){
     if (type == 'session'){
         sessionStorage.setItem(key,JSON.stringify(data));
@@ -652,6 +659,31 @@ function ejercicio2 (type:string = "SessionStorage", key:string, data:Tarea[] ){
 
 }
 
-ejercicio2 ("session","TareasSesion",listadeTareas);
-    
+/*Ejercicio 3 Practica 1.1* --> Vamos a ejecutar la funcion anterior tal y como se nos indica en el enunciado del documento */
+ejercicio2 ("session", "datos", listadeTareas);
+ejercicio2 ("local", "datos", listadeTareas);
+
+
+/*Ejercicio 4 Practica 1.1*/
+/**
+ * Metodo que nos permite recuperar la informacion almacenada en SessionStorage y LocalStorage
+ * @param type - forma en la que gestionaremos la información almacenada (session para SessionStorage y local para LocalStorage)
+ * @param key 
+ * @returns 
+ */
+function ejercicio4 (type:string = "session", key:string) : string | null{
+    let recuperar:string|null;    
+    if (key == "session"){
+            recuperar = sessionStorage.getItem(key);
+
+    }else if (type == "local"){
+            recuperar = sessionStorage.getItem(key);
+    }else{
+            recuperar = null;
+    }
+
+    console.log (`Datos recuperados de ${type}Storage con la clave ${key}`);
+     return recuperar;
+
+}
 
