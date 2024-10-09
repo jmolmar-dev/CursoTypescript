@@ -566,5 +566,76 @@ console.log(funcionGen.next());
 
 
 
+/*Clase 09-10-2024*/
+
+/*Repaso Funciones Generadoras*/
+
+function* fGeneradora2 () : Generator <String> {
+    yield "Hola";
+    yield "Mundo";
+}
+
+let funcionGen2 = fGeneradora2();
+
+let str = funcionGen2.next(); // Obtiene el primer valor del iterador.
+
+
+
+
+type WebPage = {
+    Name:string,
+    Domain:string,
+    Description:string
+}
+
+
+/*Mezclando funciones generadores y asincronas*/
+async function* obtenerDatosWeb() : AsyncGenerator <WebPage>{
+    let peticion = await fetch ("https://haveibeenpwned.com/api/v2/breaches");
+    let datos:WebPage[] = await peticion.json() as WebPage[];
+
+
+    for (let index = 0; index < datos.length; index++){
+        yield datos[index];
+    }
+    
+}
+
+
+let datosWebPage = obtenerDatosWeb();
+
+/*En cada un de estos next(), iremos iterando sobre los elementos del JSON y sacaemos de cada posicion la informacion necesaria*/
+datosWebPage.next().then(
+    ({value,done}) => {
+        console.log(value.Name);
+    }
+);
+
+
+datosWebPage.next().then(
+    ({value,done}) => {
+        console.log(`${value.Name} - ${value.Description}`);
+    }
+);
+
+/*SobreCargas de Funciones*/
+
+function hola (nombre:string):string;
+function hola (nombre:string, apellid:string):string;
+function hola (nombre:string, apellido:string, edad?:string):string;
+
+function hola (nombre:string, apellido?:string, edad?:string){
+    let saludo = `Hola ${nombre}`;
+    if (apellido != undefined){
+        saludo = saludo + `${apellido}`;
+    }
+
+    if (edad != undefined){
+        saludo = saludo + `${edad}`;
+    }
+
+    return saludo;
+}
+
 
 
