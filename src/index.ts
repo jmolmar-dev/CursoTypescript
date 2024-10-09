@@ -716,3 +716,29 @@ function ejercicio6 (type:string, key:string){
 ejercicio6("session","datos");
 ejercicio6("local", "datos");
 
+/*Ejercicio 7 Practica 1.1*/
+import Cookies  from "js-cookie";
+
+//Crea una cookie llamada nombre con tu nombre que expire a los 7 días y sea accesible desde el path /
+Cookies.set('nombre', 'Juan', {expires : 7, path: '/'});
+
+//Crea una cookie llamada apellidos con tu apellido que expire a los 2 días
+Cookies.set('apellidos','Molero', {expires:2});
+
+//Crea una cookie llamada email con un email que expire a los 4 días.
+Cookies.set ('email','jmolero0896@gmail.com');
+
+//Recupera todas las cookies anteriores.
+let nombreCookies = Cookies.get('nombre');
+let apellidosCookies = Cookies.get('apellidos');
+let emailCookies = Cookies.get('email');
+
+console.log(nombreCookies);
+console.log(apellidosCookies);
+console.log(emailCookies);
+
+//Borra todas las cookies anteriores
+Cookies.remove('nombre');
+Cookies.remove('apellidos');
+Cookies.remove ('email');
+
