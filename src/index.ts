@@ -673,7 +673,7 @@ ejercicio2 ("local", "datos", listadeTareas);
  */
 function ejercicio4 (type:string = "session", key:string) : string | null{
     let recuperar:string|null;    
-    if (key == "session"){
+    if (type == "session"){
             recuperar = sessionStorage.getItem(key);
 
     }else if (type == "local"){
@@ -686,4 +686,10 @@ function ejercicio4 (type:string = "session", key:string) : string | null{
      return recuperar;
 
 }
+
+sessionStorage.setItem("session","Este es el valor que hemos agregado dentro de sessionStorage");
+sessionStorage.setItem("local","Este es el valor que hemos agregado dentro de localStorage");
+
+ejercicio4("session","session");
+ejercicio4("local","local");
 
