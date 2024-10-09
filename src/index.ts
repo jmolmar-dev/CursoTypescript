@@ -721,24 +721,37 @@ import Cookies  from "js-cookie";
 
 //Crea una cookie llamada nombre con tu nombre que expire a los 7 días y sea accesible desde el path /
 Cookies.set('nombre', 'Juan', {expires : 7, path: '/'});
+console.log('Cookie "nombre" creada:', Cookies.get('nombre'));
 
 //Crea una cookie llamada apellidos con tu apellido que expire a los 2 días
 Cookies.set('apellidos','Molero', {expires:2});
+console.log('Cookie "apellidos" creada:', Cookies.get('apellidos')); 
 
 //Crea una cookie llamada email con un email que expire a los 4 días.
 Cookies.set ('email','jmolero0896@gmail.com');
+console.log('Cookie "email" creada:', Cookies.get('email'));
+
 
 //Recupera todas las cookies anteriores.
 let nombreCookies = Cookies.get('nombre');
 let apellidosCookies = Cookies.get('apellidos');
 let emailCookies = Cookies.get('email');
 
-console.log(nombreCookies);
-console.log(apellidosCookies);
-console.log(emailCookies);
+console.log('Cookies recuperadas:');
+console.log('Nombre:', nombreCookies);
+console.log('Apellidos:', apellidosCookies);
+console.log('Email:', emailCookies);
 
 //Borra todas las cookies anteriores
 Cookies.remove('nombre');
 Cookies.remove('apellidos');
 Cookies.remove ('email');
+
+console.log('Cookies después de borrar:');
+console.log('Nombre:', nombreCookies); 
+console.log('Apellidos:', apellidosCookies); 
+console.log('Email:', emailCookies); 
+
+/*Al borrar las cookies, nos tendra que salir como resultado undefined*/
+
 
