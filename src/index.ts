@@ -639,3 +639,19 @@ function hola (nombre:string, apellido?:string, edad?:string){
 
 
 
+/*Ejercicio 2 Practica 1.1*/
+function ejercicio2 (type:string = "SessionStorage", key:string, data:Tarea[] ){
+    if (type == 'session'){
+        sessionStorage.setItem(key,JSON.stringify(data));
+        console.log ("La información de las tareas ha sido almacenada en SessionStorage");
+    }else if (type == 'local') {
+        localStorage.setItem(key, JSON.stringify(data));
+        console.log ("La información de las tareas ha sido almacenada en LocalStorage");
+    }
+
+
+}
+
+ejercicio2 ("session","TareasSesion",listadeTareas);
+    
+
