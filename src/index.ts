@@ -668,7 +668,7 @@ ejercicio2 ("local", "datos", listadeTareas);
 /**
  * Metodo que nos permite recuperar la informacion almacenada en SessionStorage y LocalStorage
  * @param type - forma en la que gestionaremos la información almacenada (session para SessionStorage y local para LocalStorage)
- * @param key 
+ * @param key - clave mediante la cual deseamos recuperar la informacion
  * @returns 
  */
 function ejercicio4 (type:string = "session", key:string) : string | null{
@@ -687,9 +687,32 @@ function ejercicio4 (type:string = "session", key:string) : string | null{
 
 }
 
+/*Ejercicio 5 Practica 1.1 --> Probaremos la funcion del ejercicio 4*/
 sessionStorage.setItem("session","Este es el valor que hemos agregado dentro de sessionStorage");
 sessionStorage.setItem("local","Este es el valor que hemos agregado dentro de localStorage");
 
 ejercicio4("session","session");
 ejercicio4("local","local");
+
+
+/**
+ * Funcion que nos permite borrar informacion bien almacenada en sessionStorage o LocalStorage
+ * @param type - tipo del que se desea borrar la información (SessionStorage o LocalStorage)
+ * @param key  - clave con la que deseamos borrar la informacion
+ */
+/*Ejercicio 6 Practica 1.1*/
+function ejercicio6 (type:string, key:string){
+    if (type == "session"){
+        sessionStorage.removeItem(key);
+        console.log (`Informacion borrada de tipo ${type} mediante la clave ${key}`);
+    }else if (type == "local"){
+        localStorage.removeItem (key);
+        console.log (`Informacion borrada de tipo ${type} mediante la clave ${key}`);
+    }else{
+        console.log (`tipo de almacenamiento introducido no valido ${type}`);
+    }
+}
+
+ejercicio6("session","datos");
+ejercicio6("local", "datos");
 
