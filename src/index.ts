@@ -756,3 +756,69 @@ console.log('Email:', Cookies.get('email'));
 
 
 
+
+
+
+/*Acceso a elementos del DOM --> Clase 10/10/2024*/
+
+/*Lo primero sera declarar una variable*/
+
+/**
+ * Elementos HTML:
+ * HTMLInputElement
+ * HMTLAnchorElement
+ * HTMLTextAreaElement
+ * HTML DataListElement
+ * HTML ButtonElement
+ * HTML OListElement
+ * HMTL UListElement
+
+ */
+let input = document.getElementById("input contenido") as HTMLInputElement;
+let btnNuevoContenido = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
+let div = document.getElementsByTagName("div") as HTMLCollectionOf<HTMLDivElement>;
+
+console.log(input);
+console.log(btnNuevoContenido);
+console.log(div);
+
+//querySelector () --> Devolvera un elemento
+//querySelectorAll () --> Devolera un array
+/*Les meteremos dentro un id con # o un class con . */
+
+/*ol > li*/
+/*ol[id = ' ']*/
+/*ol [id = ' '] > li*/
+
+let elementoOL = document.querySelector("#lista-contenidos") as HTMLOListElement;
+let elementosLI = document.getElementById("lista-contenidos")?.getElementsByTagName("li"); /*la ? indica que no podra ser nulo*/
+let elementosLI2 = document.querySelectorAll("ol [id = 'lista-contenidos'] > li ");
+/*Dos formas de hacer lo mismo*/
+
+/*Se muestran de forma distinta, pero ambos objetos podran ser iterados*/
+console.log(elementosLI);
+console.log(elementosLI2);
+
+/*Creacion de Elementos*/
+let nuevoElemento = document.createElement("li"); /*Aqui no tendria sentido hacer un casting, el metodo interpreta el tipo de dato a devolver*/
+nuevoElemento.innerText = "Nuevo Elemento";
+/*nuevoElemento.setAtributtes()*/
+/*Hemos creado un elemento, pero no lo hemos incluido en el DOM*/ 
+elementoOL.appendChild(nuevoElemento);
+/*elementoOL.prepend(nuevoElemento);*/
+/*elementoOL.append (nuevoElemento) */
+
+
+/*Incluir un evento al boton*/
+/**
+ * clic
+ * mouseover
+ */
+btnNuevoContenido.addEventListener ("click", (event) => {
+    console.log("Usuario hace click en el boton");
+});
+
+
+
+
+
