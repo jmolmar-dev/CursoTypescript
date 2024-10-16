@@ -777,11 +777,9 @@ console.log('Email:', Cookies.get('email'));
 
 
 let input = document.getElementById("input-contenido") as HTMLInputElement;
-let btnNuevoContenido = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
 let div = document.getElementsByTagName("div") as HTMLCollectionOf<HTMLDivElement>;
 
 console.log(input);
-console.log(btnNuevoContenido);
 console.log(div);
 
 //querySelector () --> Devolvera un elemento
@@ -792,15 +790,9 @@ console.log(div);
 /*ol[id = ' ']*/
 /*ol [id = ' '] > li*/
 
-let elementoOL = document.querySelector("#lista-contenidos") as HTMLOListElement;
-let elementosLI = document.getElementById("lista-contenidos")?.getElementsByTagName("li"); /*la ? indica que no podra ser nulo*/
-let elementosLI2 = document.querySelectorAll("ol [id = 'lista-contenidos'] > li ");
-
 /*Dos formas de hacer lo mismo*/
-
 /*Se muestran de forma distinta, pero ambos objetos podran ser iterados*/
-console.log(elementosLI);
-console.log(elementosLI2);
+
 
 /*Creacion de Elementos*/
 /*let nuevoElemento = document.createElement("li"); Aqui no tendria sentido hacer un casting, el metodo interpreta el tipo de dato a devolver*/
@@ -818,6 +810,14 @@ console.log(elementosLI2);
  * dblclick - el usuario hace doble click en un elemento
  * mouseover
  */
+
+let elementoOL = document.querySelector("#lista-contenidos") as HTMLOListElement;
+let elementosLI = document.getElementById("lista-contenidos")?.getElementsByTagName("li"); /*la ? indica que no podra ser nulo*/
+let elementosLI2 = document.querySelectorAll("ol [id = 'lista-contenidos'] > li ");
+
+
+let btnNuevoContenido = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
+console.log(btnNuevoContenido);
 btnNuevoContenido.addEventListener ("click", (event) => {
     /*Verificaremos que el campo de texto no este vacio antes de crear el elemento e incluirlo*/
     if (input.value.trim() != ""){
@@ -830,6 +830,22 @@ btnNuevoContenido.addEventListener ("click", (event) => {
         console.log("Lo sentimos, pero el campo de texto esta vacio");
     }
 });
+
+let btnEliminaContenido = document.getElementsByName("btn-remove-content")[0] as HTMLButtonElement;
+console.log(btnEliminaContenido);
+
+btnEliminaContenido.addEventListener ("click", (event:Event)=>{
+    /*Si encontramos algun elemento dentro de la OL y es el ultimo será eliminado, en caso de no encontrar ninguno
+    informaremos al usuario*/
+    if (elementoOL.lastElementChild){
+        elementoOL.removeChild(elementoOL.lastElementChild);
+    }else{
+        console.log("Lo sentimos, pero no tenemos elementos que eliminar");
+    }
+});
+
+
+
 
 /*Clase 16/10/2024: */
 /*Define e implementa una funcion generica que reciba como parametro  lo que considere oportuno y en funcion del tipo de evento
@@ -857,7 +873,7 @@ function ejecutaAlgo (evento:Event){
 
 
 /*let elementoOL: HTMLOListElement = document.getElementbyId("lista-contenidos") as HTMLOList*;
- let primerElemento: HTMLLIElement = elementoOL.children[0] as HTMLLIElement
+ let primerElemento: HTMLLIElement = elementoOL.children[0] as HTMLLIElement;
  elementoOL.firstElementChild;
  elementoOL.lastElementChild;
  elementoOl.nextElementSibling;
