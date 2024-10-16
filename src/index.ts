@@ -602,6 +602,7 @@ async function* obtenerDatosWeb() : AsyncGenerator <WebPage>{
 }
 
 
+
 let datosWebPage = obtenerDatosWeb();
 
 /*En cada un de estos next(), iremos iterando sobre los elementos del JSON y sacaemos de cada posicion la informacion necesaria*/
@@ -813,7 +814,8 @@ console.log(elementosLI2);
 
 /*Incluir un evento al boton*/
 /**
- * clic
+ * click - El usuario hace clic sobre el elemento
+ * dblclick - el usuario hace doble click en un elemento
  * mouseover
  */
 btnNuevoContenido.addEventListener ("click", (event) => {
@@ -829,6 +831,38 @@ btnNuevoContenido.addEventListener ("click", (event) => {
     }
 });
 
+/*Clase 16/10/2024: */
+/*Define e implementa una funcion generica que reciba como parametro  lo que considere oportuno y en funcion del tipo de evento
+que se produzca en un elemento del DOM, realize una funcion diferente*/
+
+function ejecutaAlgo (evento:Event){
+    switch (evento.type){
+        case "click":
+            console.log("Ha hecho click");
+            break;
+
+        case "dblclick":
+            console.log("Ha hecho doble click");
+            break;
+        default:
+            break;
+    }
+}
+
+/*CASO PRACTICO --> LISTA CON DOS BOTONES: UNA CON EL BOTON AÑADIR, Y UN REMOVE QUE ELIMINE EL ELEMENTO QUE COINCIDA CON EL INPUT*/
+//divisor.addEventListener("click",addLista);
+//divisor.addEventListener("click",addErrores);
+
+//divisor.removeEventListener("click",addLista);
+
+
+/*let elementoOL: HTMLOListElement = document.getElementbyId("lista-contenidos") as HTMLOList*;
+ let primerElemento: HTMLLIElement = elementoOL.children[0] as HTMLLIElement
+ elementoOL.firstElementChild;
+ elementoOL.lastElementChild;
+ elementoOl.nextElementSibling;
+ elementoOL.previousElementSibling;
+*/
 
 
 
