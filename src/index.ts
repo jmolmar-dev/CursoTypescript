@@ -544,6 +544,30 @@ getDataUniversity().then((data:University[]) => {
     })
 })
 
+type Perro = {
+    message:string,
+    status:string
+}
+
+
+async function getDataDog() : Promise <Perro> {
+    let peticion = await fetch (" https://dog.ceo/api/breeds/image/random");
+    let datos = await peticion.json() as Promise <Perro>;
+    return datos;
+
+}
+
+let fAsincrona = getDataDog();
+fAsincrona.then ((prueba:Perro) => {
+    console.log(prueba.message);
+    let image = document.createElement("img") as HTMLImageElement;
+    image.src = prueba.message;
+    let body = document.getElementsByTagName("body")[0] as HTMLBodyElement;
+    body.appendChild (image);
+})
+
+
+
 /*getDataUniversity().then ((data:University[]) => {
     for (let i = 0; i < data.lenght; i++){
     console.log (data[i].name)
@@ -593,7 +617,7 @@ type WebPage = {
 async function* obtenerDatosWeb() : AsyncGenerator <WebPage>{
     let peticion = await fetch ("https://haveibeenpwned.com/api/v2/breaches");
     let datos:WebPage[] = await peticion.json() as WebPage[];
-
+    
 
     for (let index = 0; index < datos.length; index++){
         yield datos[index];
@@ -776,11 +800,7 @@ console.log('Email:', Cookies.get('email'));
  */
 
 
-let input = document.getElementById("input-contenido") as HTMLInputElement;
-let div = document.getElementsByTagName("div") as HTMLCollectionOf<HTMLDivElement>;
 
-console.log(input);
-console.log(div);
 
 //querySelector () --> Devolvera un elemento
 //querySelectorAll () --> Devolera un array
@@ -815,6 +835,11 @@ let elementoOL = document.querySelector("#lista-contenidos") as HTMLOListElement
 let elementosLI = document.getElementById("lista-contenidos")?.getElementsByTagName("li"); /*la ? indica que no podra ser nulo*/
 let elementosLI2 = document.querySelectorAll("ol [id = 'lista-contenidos'] > li ");
 
+let input = document.getElementById("input-contenido") as HTMLInputElement;
+let div = document.getElementsByTagName("div") as HTMLCollectionOf<HTMLDivElement>;
+
+console.log(input);
+console.log(div);
 
 let btnNuevoContenido = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
 console.log(btnNuevoContenido);
@@ -878,6 +903,16 @@ function ejecutaAlgo (evento:Event){
  elementoOL.lastElementChild;
  elementoOl.nextElementSibling;
  elementoOL.previousElementSibling;
+*/
+
+/*Cambiarle el estilo a la estrella en funcion de si paso por encima de ella o no: 
+Obtengo referencia a estrella: 
+añado evento mouseover mouseout click
+- Si la estrella tiene la clase bi bi-start pasara a fill, y viceversa
+
+let ElementoStar:HTMLSpanElement = document.getElementbyID ("id que le pongamos") as HMTLSpanElement;
+elementoStar.classList.remove ('bi-start')
+elemento.classList.toggle ('bi-start-fill')
 */
 
 
