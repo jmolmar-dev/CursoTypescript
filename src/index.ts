@@ -831,44 +831,6 @@ console.log('Email:', Cookies.get('email'));
  * mouseover
  */
 
-let elementoOL = document.querySelector("#lista-contenidos") as HTMLOListElement;
-let elementosLI = document.getElementById("lista-contenidos")?.getElementsByTagName("li"); /*la ? indica que no podra ser nulo*/
-let elementosLI2 = document.querySelectorAll("ol [id = 'lista-contenidos'] > li ");
-
-let input = document.getElementById("input-contenido") as HTMLInputElement;
-let div = document.getElementsByTagName("div") as HTMLCollectionOf<HTMLDivElement>;
-
-console.log(input);
-console.log(div);
-
-let btnNuevoContenido = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
-console.log(btnNuevoContenido);
-btnNuevoContenido.addEventListener ("click", (event) => {
-    /*Verificaremos que el campo de texto no este vacio antes de crear el elemento e incluirlo*/
-    if (input.value.trim() != ""){
-        console.log("Usuario hace click en el boton");
-        let nuevoElemento = document.createElement("li");
-        nuevoElemento.innerText = input.value;  
-        elementoOL.appendChild(nuevoElemento);
-        input.value = "";
-    }else{
-        console.log("Lo sentimos, pero el campo de texto esta vacio");
-    }
-});
-
-let btnEliminaContenido = document.getElementsByName("btn-remove-content")[0] as HTMLButtonElement;
-console.log(btnEliminaContenido);
-
-btnEliminaContenido.addEventListener ("click", (event:Event)=>{
-    /*Si encontramos algun elemento dentro de la OL y es el ultimo será eliminado, en caso de no encontrar ninguno
-    informaremos al usuario*/
-    if (elementoOL.lastElementChild){
-        elementoOL.removeChild(elementoOL.lastElementChild);
-    }else{
-        console.log("Lo sentimos, pero no tenemos elementos que eliminar");
-    }
-});
-
 
 
 
@@ -915,7 +877,86 @@ elementoStar.classList.remove ('bi-start')
 elemento.classList.toggle ('bi-start-fill')
 */
 
+/*Caso practico 2 TypeScript: */
 
+let input = document.getElementById("input-contenido") as HTMLInputElement;
+//let div = document.getElementsByTagName("div") as HTMLCollectionOf<HTMLDivElement>;
+let parrafoError = document.querySelector("#p-errores") as HTMLParagraphElement;
+
+
+let elementoOL = document.querySelector("#lista-contenidos") as HTMLOListElement;
+//let elementosLI = document.getElementById("lista-contenidos")?.getElementsByTagName("li"); la ? indica que no podra ser nulo
+//let elementosLI2 = document.querySelectorAll("ol [id = 'lista-contenidos'] > li ");
+
+
+let btnNuevoContenido = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
+console.log(btnNuevoContenido);
+btnNuevoContenido.addEventListener ("click", (event) => {
+    /*Verificaremos que el campo de texto no este vacio antes de crear el elemento e incluirlo*/
+    if (input.value.trim() != ""){
+        let elementoStar = document.createElement("i");
+        /*Las clases si tienen espacio debemos de añadirlas por separado*/
+        elementoStar.classList.add("bi");
+        elementoStar.classList.add("bi-star");
+        elementoStar.setAttribute ("name","star-li");
+        let nuevoElemento = document.createElement("li");
+        nuevoElemento.appendChild(elementoStar);
+        nuevoElemento.appendChild(document.createTextNode(input.value)); 
+        elementoOL.appendChild(nuevoElemento);
+        input.value = "";
+    }else{
+       let mensajeError = document.createElement("div");
+       mensajeError.style.color = "red";
+       mensajeError.textContent = "El campo de texto no puede estar vacio"
+       parrafoError.appendChild(mensajeError);
+    }
+});
+
+
+let btnEliminarContenido = document.getElementById("btn-remove-content") as HTMLButtonElement;
+
+btnEliminarContenido.addEventListener ("click", (event:Event) => {
+    if (elementoOL.lastElementChild){
+        elementoOL.removeChild(elementoOL.lastElementChild);
+    }else{
+        console.log("Lo sentimos pero no tenemos elementos que borrar")
+    }
+});
+
+
+/*Recogemos los elementos i mediante una lista gracias a que comparten el mismo name,
+sobre la que iteraremos posteriormente para incluir los eventos*/
+let elementosStar = document.getElementsByName("star-li") as NodeListOf<HTMLElement>;
+elementosStar.forEach(elemento => {
+    
+    elemento.addEventListener("click", (event:Event) => {
+        console.log ("click en el elemento");
+        elemento.classList.remove("bi");
+        elemento.classList.remove("bi-star");
+        elemento.classList.toggle("bi");
+        elemento.classList.toggle("bi-star-fill");
+    })
+
+
+    /*Evento que sucede cuando dejamos el puntero en el elemento*/
+    elemento.addEventListener("mouseover", (event:Event) => {
+        elemento.classList.remove("bi");
+        elemento.classList.remove("bi-star");
+        elemento.classList.toggle("bi");
+        elemento.classList.toggle("bi-star-fill");
+    })
+
+    /*Evento que sucede cuando retiramos el puntero del elemento*/
+    elemento.addEventListener("mouseout",(event:Event) => {
+        elemento.classList.remove("bi");
+        elemento.classList.remove("bi-star-fill");
+        elemento.classList.toggle("bi");
+        elemento.classList.toggle("bi-star");
+    })
+
+    
+
+});
 
 
 
