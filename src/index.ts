@@ -9,22 +9,35 @@ type Perro = {
 }
 
 
-
+/*Funcion asincrona que se conecta a una API para traese una imagen de perro aleatoria*/
 async function getDataDog() : Promise <Perro> {
     let peticion = await fetch (" https://dog.ceo/api/breeds/image/random");
+    /*Los datos que obtenemos de la peticion de arriba deberan ser parseados a JSON, ya sea una coleccion o no*/
     let datos = await peticion.json() as Promise <Perro>;
     return datos;
 
 }
 
 
+/*Llamamos a la funcion asincrona para poder obtener los datos de un perro y convertilos en una imagen posteriormente*/
 let fAsincrona = getDataDog();
 fAsincrona.then ((perro:Perro) => {
     console.log(perro.message);
-    let image = document.createElement("img") as HTMLImageElement;
-    image.src = perro.message;
+    /*Se ha creado un nuevo elemento img donde asociaremos el atributo message de perro, que nos contiene la url de la imagen*/
+    let imagenPerro = document.createElement("img") as HTMLImageElement;
+    imagenPerro.src = perro.message;
+    /*Implementaremos un evento para poder generar otra nueva imagen cuando se haga click en la que tengamos*/
+    imagenPerro.addEventListener ("click", async() => {
+        /*Se creara una nueva instancia de perro, que se agregara a la propiedad src anterior*/
+        let nuevoPerro = await getDataDog();
+        imagenPerro.src = nuevoPerro.message;
+    });
+    /*La imagen se incluye dentro del body*/
     let body = document.getElementsByTagName("body")[0] as HTMLBodyElement;
-    body.appendChild (image);
+    body.appendChild (imagenPerro);
+
+
+
 })
 
 
