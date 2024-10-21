@@ -877,6 +877,105 @@ elementoStar.classList.remove ('bi-start')
 elemento.classList.toggle ('bi-start-fill')
 */
 
+/*Clase 21-10-2024*/:
+
+/*Exportacion e importacion de clases 
+  Getters y Setters
+  Atributos Privados
+  Modificar readonly atributo*/
+
+class Persona {
+    nombre:string;
+    apellidos:string;
+    edad?:number;
+}
+
+constructor (nombre:string,apellidos:string, edad?:number){
+    this.nombre = nombre;
+    this.apellidos = apellidos;
+    
+    //Si no define la edad, valdrá 0
+    if (edad == undefined){
+        this.edad = 0;
+    }else{
+        this.edad = edad;
+    }
+}
+
+class Persona {
+    nombre:string;
+    apellidos:string;
+    edad?:number = 18;
+}
+
+constructor (nombre:string,apellidos:string, edad?:number){
+    this.nombre = nombre;
+    this.apellidos = apellidos;
+    
+    if (this.edad != undefined){
+        this.edad = edad;
+    }
+
+set setNombre (nombre:string){
+    this.nombre = nombre;
+}
+
+get getNombre (){
+    return this.nombre;
+}
+
+/*Para poner una propiedad o atributo como privado --> private, con el solo podremos trabajar con get y set*/
+/*Para que un atributo no pueda cambiar en el futuro --> readonly (no se podrá modificar un dato con el set por ejemplo DNI --> no 
+nos convedria cambiarnos nada)*/
+
+/*Inicializamos el objeto*/
+let persona1:Persona = new Persona ("Pepe","Gonzalez","00000000T");
+
+/*Convertir de objeto a JSON*/
+getJSON ():string{
+    return JSON.stringify(new Persona (this.nombre, this.apellidos, this.DNI,this.edad));
+}
 
 
+/*Convertir de JSON a Objeto*/
+getJSONToObject (json:string) : Persona {
+    return JSON.parse(json) as Persona;
+}
+
+
+/*Tambien podemos hacer el metodo toString()*/
+toTexto(){
+    console.log (`${this.nombre} - ${this.apellidos}` .... etc);
+}
+
+
+/*Herencia -> Creamos la nueva clase empleado*/
+
+class Empleado extends Persona {
+    salario:number;
+    
+    constructor Empleado (nombre:string, apellidos:string, dni: string, salario:number, edad?number){    --> Los opcionales van al final
+        super (nombre,apellidos,dni,edad);
+        this.salario = salario;
+    }                                       
+
+    let empleado1:Empleado = new Empleado (.....);
+
+    toTexto() : void {
+        super.toTexto();
+        console.log ("añadimos lo que queramos") --> Añadiria, no sobreescribe
+    }
+}
+
+/*Lo suyo es agrupar las clases en una carpeta models, que se creara en SRC*/
+
+/*Importar y Exportar clases --> Con import y export*/
+
+por ejemplo a persona le ponemos export default class persona --> el default quita las llaves en el import, y nos permite importar cosas nuestras
+para que funcionen con webpack --> asi al ejecutar el npm run build funcionara
+Luego para immportar -->  import Persona from './models/Persona' donde el punto es SRC
+
+SIN EL DEFAULT NO FUNCIONA EL BUILD
+
+}
 
