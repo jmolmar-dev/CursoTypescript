@@ -977,5 +977,45 @@ Luego para immportar -->  import Persona from './models/Persona' donde el punto 
 
 SIN EL DEFAULT NO FUNCIONA EL BUILD
 
+/*Clase 23-10-2024*/
+
+Interfaces --> las abriremos en otra carpeta
+
+export interface IPersona {
+    nombre:string,
+    apellidos:string,
+    DNI:string,
+    edad?number;
+
+    getJSON : () => string
+    getJSONToObject : (json:string) => Persona
+
+}
+    En la clase Persona despues: 
+
+    // Método que convierte la instancia en un string JSON
+    getJSON(): string {
+        return JSON.stringify({
+            nombre: this.nombre,
+            apellidos: this.apellidos,
+            DNI: this.DNI,
+            edad: this.edad
+        });
+    }
+
+    // Método que convierte un string JSON en una instancia de Persona
+    static getJSONToObject(json: string): Persona {
+        const data = JSON.parse(json);
+        return new Persona(data.nombre, data.apellidos, data.DNI, data.edad);
+    }
+
+    /*Clases abstractas*/
+    
+
+}
+
+
+
+
 }
 
